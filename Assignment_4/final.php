@@ -55,7 +55,7 @@ function lines($text)
     return preg_split("/\r\n|\r|\n/", (string)$text);
 }
 
-/* Display error message */
+/* Display error message beside field */
 function field_error($errors, $field)
 {
     if (!empty($errors[$field])) {
@@ -129,7 +129,7 @@ if (
     && isset($_POST["submit"])
 ) {
 
-    /* Get old values */
+    /* Get submitted values */
     foreach ($old as $field => $value) {
         $old[$field] = trim($_POST[$field] ?? "");
     }
@@ -317,7 +317,7 @@ if (
         }
     }
 
-    /* SAVE IMAGE */
+    /* SAVE IMAGE ONLY IF THERE ARE NO VALIDATION ERRORS */
     if (empty($errors)) {
 
         $uploadDir = "uploads/";
@@ -551,9 +551,6 @@ textarea {
     background: #f8fafc;
     font-family: inherit;
     font-size: 14px;
-    transition:
-        border-color .2s,
-        box-shadow .2s;
 }
 
 textarea {
@@ -590,16 +587,6 @@ input[type="file"] {
     margin-top: 6px;
 }
 
-.valid-field {
-    border-color: #16a34a !important;
-    background: #f0fdf4 !important;
-}
-
-.invalid-field {
-    border-color: #dc2626 !important;
-    background: #fff7f7 !important;
-}
-
 .form-alert {
     background: #fef2f2;
     border: 1px solid #fecaca;
@@ -621,7 +608,6 @@ input[type="file"] {
     font-size: 14px;
     font-weight: bold;
     cursor: pointer;
-    transition: .2s;
 }
 
 .save-btn:hover {
@@ -952,9 +938,7 @@ input[type="file"] {
                     accept="image/jpeg,image/png,image/webp"
                 >
 
-                <?php
-                field_error($errors, 'photo');
-                ?>
+                <?php field_error($errors, 'photo'); ?>
 
             </div>
 
@@ -970,14 +954,10 @@ input[type="file"] {
                     type="text"
                     name="fullname"
                     placeholder="Jessa Maureen Maniacop"
-                    value="<?= htmlspecialchars(
-                        $old['fullname']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['fullname']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'fullname');
-                ?>
+                <?php field_error($errors, 'fullname'); ?>
 
             </div>
 
@@ -993,14 +973,10 @@ input[type="file"] {
                     type="text"
                     name="jobtitle"
                     placeholder="IT Graduate"
-                    value="<?= htmlspecialchars(
-                        $old['jobtitle']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['jobtitle']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'jobtitle');
-                ?>
+                <?php field_error($errors, 'jobtitle'); ?>
 
             </div>
 
@@ -1016,14 +992,10 @@ input[type="file"] {
                     type="text"
                     name="phone"
                     placeholder="+63 912 345 6789"
-                    value="<?= htmlspecialchars(
-                        $old['phone']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['phone']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'phone');
-                ?>
+                <?php field_error($errors, 'phone'); ?>
 
             </div>
 
@@ -1039,14 +1011,10 @@ input[type="file"] {
                     type="text"
                     name="email"
                     placeholder="jessa@gmail.com"
-                    value="<?= htmlspecialchars(
-                        $old['email']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['email']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'email');
-                ?>
+                <?php field_error($errors, 'email'); ?>
 
             </div>
 
@@ -1062,14 +1030,10 @@ input[type="file"] {
                     type="text"
                     name="address"
                     placeholder="Dagupan City, Philippines"
-                    value="<?= htmlspecialchars(
-                        $old['address']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['address']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'address');
-                ?>
+                <?php field_error($errors, 'address'); ?>
 
             </div>
 
@@ -1085,14 +1049,10 @@ input[type="file"] {
                     type="text"
                     name="linkedin"
                     placeholder="linkedin.com/in/juan"
-                    value="<?= htmlspecialchars(
-                        $old['linkedin']
-                    ) ?>"
+                    value="<?= htmlspecialchars($old['linkedin']) ?>"
                 >
 
-                <?php
-                field_error($errors, 'linkedin');
-                ?>
+                <?php field_error($errors, 'linkedin'); ?>
 
             </div>
 
@@ -1107,13 +1067,9 @@ input[type="file"] {
                 <textarea
                     name="objective"
                     placeholder="To obtain an entry-level position in the Information Technology field where I can apply my knowledge and skills..."
-                ><?= htmlspecialchars(
-                    $old['objective']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['objective']) ?></textarea>
 
-                <?php
-                field_error($errors, 'objective');
-                ?>
+                <?php field_error($errors, 'objective'); ?>
 
             </div>
 
@@ -1131,13 +1087,9 @@ input[type="file"] {
 Web Development
 Problem Solving
 Communication"
-                ><?= htmlspecialchars(
-                    $old['skills']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['skills']) ?></textarea>
 
-                <?php
-                field_error($errors, 'skills');
-                ?>
+                <?php field_error($errors, 'skills'); ?>
 
             </div>
 
@@ -1154,13 +1106,9 @@ Communication"
                     placeholder="NC II
 Microsoft Certification
 Web Development Certificate"
-                ><?= htmlspecialchars(
-                    $old['certifications']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['certifications']) ?></textarea>
 
-                <?php
-                field_error($errors, 'certifications');
-                ?>
+                <?php field_error($errors, 'certifications'); ?>
 
             </div>
 
@@ -1176,13 +1124,9 @@ Web Development Certificate"
                     name="languages"
                     placeholder="English
 Filipino"
-                ><?= htmlspecialchars(
-                    $old['languages']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['languages']) ?></textarea>
 
-                <?php
-                field_error($errors, 'languages');
-                ?>
+                <?php field_error($errors, 'languages'); ?>
 
             </div>
 
@@ -1199,13 +1143,9 @@ Filipino"
                     placeholder="BS Information Technology
 Pangasinan State University
 2026"
-                ><?= htmlspecialchars(
-                    $old['education']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['education']) ?></textarea>
 
-                <?php
-                field_error($errors, 'education');
-                ?>
+                <?php field_error($errors, 'education'); ?>
 
             </div>
 
@@ -1222,13 +1162,9 @@ Pangasinan State University
                     placeholder="IT Intern - ABC Company - 2026
 Assisted in website development
 Created reports"
-                ><?= htmlspecialchars(
-                    $old['experience']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['experience']) ?></textarea>
 
-                <?php
-                field_error($errors, 'experience');
-                ?>
+                <?php field_error($errors, 'experience'); ?>
 
             </div>
 
@@ -1245,13 +1181,9 @@ Created reports"
                     placeholder="Student Management System
 PHP, MySQL, HTML, CSS
 Created a system for managing student records."
-                ><?= htmlspecialchars(
-                    $old['projects']
-                ) ?></textarea>
+                ><?= htmlspecialchars($old['projects']) ?></textarea>
 
-                <?php
-                field_error($errors, 'projects');
-                ?>
+                <?php field_error($errors, 'projects'); ?>
 
             </div>
 
@@ -1291,15 +1223,11 @@ Created a system for managing student records."
                 <div>
 
                     <div class="saved-name">
-                        <?= htmlspecialchars(
-                            $item["fullname"]
-                        ) ?>
+                        <?= htmlspecialchars($item["fullname"]) ?>
                     </div>
 
                     <div class="saved-job">
-                        <?= htmlspecialchars(
-                            $item["jobtitle"]
-                        ) ?>
+                        <?= htmlspecialchars($item["jobtitle"]) ?>
                     </div>
 
                 </div>
@@ -1363,9 +1291,7 @@ Created a system for managing student records."
             ): ?>
 
                 <img
-                    src="<?= htmlspecialchars(
-                        $resume["photo"]
-                    ) ?>"
+                    src="<?= htmlspecialchars($resume["photo"]) ?>"
                     alt="Profile Picture"
                 >
 
@@ -1392,15 +1318,11 @@ Created a system for managing student records."
         <div class="header-info">
 
             <h1>
-                <?= htmlspecialchars(
-                    $resume["fullname"]
-                ) ?>
+                <?= htmlspecialchars($resume["fullname"]) ?>
             </h1>
 
             <p>
-                <?= htmlspecialchars(
-                    $resume["jobtitle"]
-                ) ?>
+                <?= htmlspecialchars($resume["jobtitle"]) ?>
             </p>
 
         </div>
@@ -1418,31 +1340,19 @@ Created a system for managing student records."
                 </div>
 
                 <div class="side-item">
-                    ☎
-                    <?= htmlspecialchars(
-                        $resume["phone"]
-                    ) ?>
+                    ☎ <?= htmlspecialchars($resume["phone"]) ?>
                 </div>
 
                 <div class="side-item">
-                    ✉
-                    <?= htmlspecialchars(
-                        $resume["email"]
-                    ) ?>
+                    ✉ <?= htmlspecialchars($resume["email"]) ?>
                 </div>
 
                 <div class="side-item">
-                    📍
-                    <?= htmlspecialchars(
-                        $resume["address"]
-                    ) ?>
+                    📍 <?= htmlspecialchars($resume["address"]) ?>
                 </div>
 
                 <div class="side-item">
-                    🔗
-                    <?= htmlspecialchars(
-                        $resume["linkedin"]
-                    ) ?>
+                    🔗 <?= htmlspecialchars($resume["linkedin"]) ?>
                 </div>
 
             </div>
@@ -1461,8 +1371,7 @@ Created a system for managing student records."
                     <?php if (trim($item) !== ""): ?>
 
                         <div class="side-item">
-                            •
-                            <?= htmlspecialchars($item) ?>
+                            • <?= htmlspecialchars($item) ?>
                         </div>
 
                     <?php endif; ?>
@@ -1485,8 +1394,7 @@ Created a system for managing student records."
                     <?php if (trim($item) !== ""): ?>
 
                         <div class="side-item">
-                            •
-                            <?= htmlspecialchars($item) ?>
+                            • <?= htmlspecialchars($item) ?>
                         </div>
 
                     <?php endif; ?>
@@ -1533,9 +1441,7 @@ Created a system for managing student records."
                             <?php if (trim($item) !== ""): ?>
 
                                 <li>
-                                    <?= htmlspecialchars(
-                                        $item
-                                    ) ?>
+                                    <?= htmlspecialchars($item) ?>
                                 </li>
 
                             <?php endif; ?>
@@ -1564,10 +1470,7 @@ Created a system for managing student records."
                         <?php if (trim($item) !== ""): ?>
 
                             <div>
-                                •
-                                <?= htmlspecialchars(
-                                    $item
-                                ) ?>
+                                • <?= htmlspecialchars($item) ?>
                             </div>
 
                         <?php endif; ?>
@@ -1594,10 +1497,7 @@ Created a system for managing student records."
                         <?php if (trim($item) !== ""): ?>
 
                             <div>
-                                •
-                                <?= htmlspecialchars(
-                                    $item
-                                ) ?>
+                                • <?= htmlspecialchars($item) ?>
                             </div>
 
                         <?php endif; ?>
@@ -1624,10 +1524,7 @@ Created a system for managing student records."
                         <?php if (trim($item) !== ""): ?>
 
                             <div>
-                                •
-                                <?= htmlspecialchars(
-                                    $item
-                                ) ?>
+                                • <?= htmlspecialchars($item) ?>
                             </div>
 
                         <?php endif; ?>
@@ -1647,287 +1544,6 @@ Created a system for managing student records."
 <?php endif; ?>
 
 </div>
-
-<script>
-
-const form = document.querySelector("form");
-
-if (form) {
-
-    const fields = {
-
-        fullname: function(value) {
-
-            if (value.trim() === "") {
-                return "Full name is required.";
-            }
-
-            if (!/^[A-Za-z\s.'-]+$/.test(value)) {
-                return "Full name must contain letters only.";
-            }
-
-            return "";
-        },
-
-        jobtitle: function(value) {
-
-            if (value.trim() === "") {
-                return "Job title is required.";
-            }
-
-            if (!/^[A-Za-z0-9\s.,&()'-]+$/.test(value)) {
-                return "Job title contains invalid characters.";
-            }
-
-            return "";
-        },
-
-        phone: function(value) {
-
-            if (value.trim() === "") {
-                return "Phone number is required.";
-            }
-
-            if (!/^[0-9+\s()-]{7,20}$/.test(value)) {
-                return "Enter a valid phone number.";
-            }
-
-            return "";
-        },
-
-        email: function(value) {
-
-            if (value.trim() === "") {
-                return "Email address is required.";
-            }
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                return "Enter a valid email address.";
-            }
-
-            return "";
-        },
-
-        address: function(value) {
-
-            if (value.trim() === "") {
-                return "Address is required.";
-            }
-
-            return "";
-        },
-
-        linkedin: function(value) {
-
-            if (value.trim() === "") {
-                return "LinkedIn profile is required.";
-            }
-
-            if (
-                !/^(https?:\/\/)?(www\.)?linkedin\.com\/in\/[A-Za-z0-9_-]+\/?$/i.test(
-                    value.trim()
-                )
-            ) {
-                return "Enter a valid LinkedIn profile.";
-            }
-
-            return "";
-        },
-
-        objective: function(value) {
-
-            if (value.trim() === "") {
-                return "Career objective is required.";
-            }
-
-            return "";
-        },
-
-        skills: function(value) {
-
-            if (value.trim() === "") {
-                return "At least one skill is required.";
-            }
-
-            return "";
-        },
-
-        certifications: function(value) {
-
-            if (value.trim() === "") {
-                return "At least one certification is required.";
-            }
-
-            return "";
-        },
-
-        languages: function(value) {
-
-            if (value.trim() === "") {
-                return "At least one language is required.";
-            }
-
-            return "";
-        },
-
-        experience: function(value) {
-
-            if (value.trim() === "") {
-                return "Work experience is required.";
-            }
-
-            return "";
-        },
-
-        education: function(value) {
-
-            if (value.trim() === "") {
-                return "Education is required.";
-            }
-
-            return "";
-        },
-
-        projects: function(value) {
-
-            if (value.trim() === "") {
-                return "At least one project is required.";
-            }
-
-            return "";
-        }
-
-    };
-
-    Object.keys(fields).forEach(function(name) {
-
-        const input =
-            form.querySelector(
-                '[name="' + name + '"]'
-            );
-
-        if (!input) {
-            return;
-        }
-
-        input.addEventListener(
-            "input",
-            function() {
-                validateField(input);
-            }
-        );
-
-        input.addEventListener(
-            "blur",
-            function() {
-                validateField(input);
-            }
-        );
-
-    });
-
-    function validateField(input) {
-
-        const message =
-            fields[input.name](
-                input.value
-            );
-
-        const group =
-            input.closest(".form-group");
-
-        let error =
-            group.querySelector(".live-error");
-
-        if (!error) {
-
-            error =
-                document.createElement("span");
-
-            error.className =
-                "field-error live-error";
-
-            group.appendChild(error);
-        }
-
-        if (message !== "") {
-
-            input.classList.remove(
-                "valid-field"
-            );
-
-            input.classList.add(
-                "invalid-field"
-            );
-
-            error.textContent =
-                message;
-
-            error.style.display =
-                "block";
-
-        } else {
-
-            input.classList.remove(
-                "invalid-field"
-            );
-
-            input.classList.add(
-                "valid-field"
-            );
-
-            error.textContent =
-                "";
-
-            error.style.display =
-                "none";
-        }
-
-    }
-
-    form.addEventListener(
-        "submit",
-        function(event) {
-
-            let hasError = false;
-
-            Object.keys(fields).forEach(
-                function(name) {
-
-                    const input =
-                        form.querySelector(
-                            '[name="' +
-                            name +
-                            '"]'
-                        );
-
-                    if (!input) {
-                        return;
-                    }
-
-                    validateField(input);
-
-                    if (
-                        fields[name](
-                            input.value
-                        ) !== ""
-                    ) {
-                        hasError = true;
-                    }
-
-                }
-            );
-
-            if (hasError) {
-                event.preventDefault();
-            }
-
-        }
-    );
-
-}
-
-</script>
 
 </body>
 
