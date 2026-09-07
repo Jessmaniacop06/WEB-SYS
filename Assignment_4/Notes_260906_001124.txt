@@ -1,0 +1,17 @@
+From your Assignment 3 you need to add server side validation. Add the following requirements
+
+• Add validation each field accordingly
+
+• All fields are required
+
+• dont use "html 5 required attribute"
+
+• all validation must be done in the server side
+
+• validation must display beside every field in red format and must display the exact error message
+
+• change the design for this activity(must be professional and clean looking)
+
+• Push to your repo
+
+• send screenshot  of the final output and url of your repo
