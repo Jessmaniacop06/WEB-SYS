@@ -24,7 +24,6 @@ CREATE TABLE IF NOT EXISTS resumes (
 )
 ");
 
-/* Add missing columns if the database already exists */
 $columns = $db->query("PRAGMA table_info(resumes)")
               ->fetchAll(PDO::FETCH_ASSOC);
 
@@ -49,13 +48,11 @@ foreach ($requiredColumns as $column => $type) {
     }
 }
 
-/* Convert textarea lines into array */
 function lines($text)
 {
     return preg_split("/\r\n|\r|\n/", (string)$text);
 }
 
-/* Display error message beside field */
 function field_error($errors, $field)
 {
     if (!empty($errors[$field])) {
@@ -65,7 +62,6 @@ function field_error($errors, $field)
     }
 }
 
-/* Add error class */
 function field_class($errors, $field)
 {
     return !empty($errors[$field]) ? "has-error" : "";
@@ -73,7 +69,6 @@ function field_class($errors, $field)
 
 $errors = [];
 
-/* Old form values */
 $old = [
     "fullname" => "",
     "jobtitle" => "",
@@ -90,7 +85,6 @@ $old = [
     "projects" => ""
 ];
 
-/* DELETE RESUME */
 if (isset($_GET["delete"])) {
 
     $id = filter_input(INPUT_GET, "delete", FILTER_VALIDATE_INT);
@@ -123,18 +117,15 @@ if (isset($_GET["delete"])) {
     exit;
 }
 
-/* SUBMIT FORM */
 if (
     $_SERVER["REQUEST_METHOD"] === "POST"
     && isset($_POST["submit"])
 ) {
 
-    /* Get submitted values */
     foreach ($old as $field => $value) {
         $old[$field] = trim($_POST[$field] ?? "");
     }
 
-    /* FULL NAME */
     if ($old["fullname"] === "") {
 
         $errors["fullname"] =
@@ -151,7 +142,6 @@ if (
             "Full name must contain letters only.";
     }
 
-    /* JOB TITLE */
     if ($old["jobtitle"] === "") {
 
         $errors["jobtitle"] =
@@ -168,7 +158,6 @@ if (
             "Job title contains invalid characters.";
     }
 
-    /* PHONE */
     if ($old["phone"] === "") {
 
         $errors["phone"] =
@@ -185,7 +174,6 @@ if (
             "Enter a valid phone number.";
     }
 
-    /* EMAIL */
     if ($old["email"] === "") {
 
         $errors["email"] =
@@ -202,14 +190,12 @@ if (
             "Enter a valid email address.";
     }
 
-    /* ADDRESS */
     if ($old["address"] === "") {
 
         $errors["address"] =
             "Address is required.";
     }
 
-    /* LINKEDIN */
     if ($old["linkedin"] === "") {
 
         $errors["linkedin"] =
@@ -226,56 +212,48 @@ if (
             "Enter a valid LinkedIn profile.";
     }
 
-    /* OBJECTIVE */
     if ($old["objective"] === "") {
 
         $errors["objective"] =
             "Career objective is required.";
     }
 
-    /* SKILLS */
     if ($old["skills"] === "") {
 
         $errors["skills"] =
             "At least one skill is required.";
     }
 
-    /* CERTIFICATIONS */
     if ($old["certifications"] === "") {
 
         $errors["certifications"] =
             "At least one certification is required.";
     }
 
-    /* LANGUAGES */
     if ($old["languages"] === "") {
 
         $errors["languages"] =
             "At least one language is required.";
     }
 
-    /* EXPERIENCE */
     if ($old["experience"] === "") {
 
         $errors["experience"] =
             "Work experience is required.";
     }
 
-    /* EDUCATION */
     if ($old["education"] === "") {
 
         $errors["education"] =
             "Education is required.";
     }
 
-    /* PROJECTS */
     if ($old["projects"] === "") {
 
         $errors["projects"] =
             "At least one project is required.";
     }
 
-    /* PROFILE PICTURE */
     if (
         !isset($_FILES["photo"])
         || $_FILES["photo"]["error"] === UPLOAD_ERR_NO_FILE
@@ -317,7 +295,6 @@ if (
         }
     }
 
-    /* SAVE IMAGE ONLY IF THERE ARE NO VALIDATION ERRORS */
     if (empty($errors)) {
 
         $uploadDir = "uploads/";
@@ -359,7 +336,6 @@ if (
         }
     }
 
-    /* INSERT INTO DATABASE */
     if (empty($errors)) {
 
         $stmt = $db->prepare("
@@ -410,7 +386,6 @@ if (
     }
 }
 
-/* GET RESUME */
 $resume = null;
 
 if (isset($_GET["resume"])) {
@@ -434,7 +409,6 @@ if (isset($_GET["resume"])) {
     }
 }
 
-/* GET ALL SAVED RESUMES */
 $savedResumes =
     $db->query("
         SELECT *
