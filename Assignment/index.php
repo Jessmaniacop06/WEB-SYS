@@ -1,7 +1,7 @@
 <?php
 require __DIR__ . '/config.php';
 
-// ---------- FILTERS ----------
+
 $keyword = trim($_GET['keyword'] ?? '');
 $gender  = trim($_GET['gender']  ?? '');
 $from    = trim($_GET['from']    ?? '');
@@ -11,8 +11,7 @@ $where  = [];
 $params = [];
 
 if ($keyword !== '') {
-    // firstname, lastname, middlename of the user,
-    // plus description / course_code of any course the user is enrolled in
+ 
     $like    = "%$keyword%";
     $where[] = "(u.firstname LIKE ? OR u.lastname LIKE ? OR u.middlename LIKE ?
                  OR EXISTS (
@@ -44,7 +43,7 @@ $stmt = $pdo->prepare($sql);
 $stmt->execute($params);
 $users = $stmt->fetchAll();
 
-// Load the course details of the listed users (all shown in the same row)
+
 $coursesByUser = [];
 if ($users) {
     $ids = array_column($users, 'user_id');
@@ -62,7 +61,7 @@ if ($users) {
     }
 }
 
-// Flash messages
+
 $messages = [
     'added'   => 'User added successfully.',
     'updated' => 'User updated successfully.',
