@@ -12,7 +12,7 @@ $in = [
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $in       = read_user_input();
     $selected = read_course_ids($pdo);
-    $errors   = validate_user($pdo, $in);   // includes unique email check
+    $errors   = validate_user($pdo, $in);  
 
     if (!$errors) {
         try {
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit;
         } catch (PDOException $ex) {
             $pdo->rollBack();
-            // 1062 = duplicate entry (someone saved the same email at the same time)
+           
             if ($ex->errorInfo[1] === 1062) {
                 $errors['email'] = 'This email is already registered.';
             } else {
